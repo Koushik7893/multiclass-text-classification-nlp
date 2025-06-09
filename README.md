@@ -1,65 +1,97 @@
-# 🧠 Binary Text Classification using Traditional Machine Learning
+# 🧠 Multiclass Text Classification with Classical ML, Deep Learning, and Transformers
 
-This project demonstrates different techniques for binary text classification using traditional machine learning models such as **Logistic Regression**, **Support Vector Machine (SVM)**, and **Naive Bayes**. It focuses on **vectorization techniques** like **TF-IDF**, **CountVectorizer**, **n-grams**, and **character-level features** to represent textual data for model training.
-
----
-
-## 📌 Tasks Covered
-
-The notebook contains a step-by-step demonstration of the following:
-
-### 🔹 1. Loading Dataset
-- Import and inspect binary-labeled text data.
-
-### 🔹 2. Vectorization Techniques
-- **TF-IDF**
-- **CountVectorizer**
-- **N-gram TF-IDF** (bigrams & trigrams)
-- **Character-level TF-IDF**
-- Visualization of fitted vectorizer (`vocabulary_`, `idf_`, etc.)
-
-### 🔹 3. Models Implemented
-| Vectorizer | Model                  | Notes                        |
-|------------|------------------------|------------------------------|
-| TF-IDF     | Logistic Regression     | Standard baseline            |
-| CountVectorizer | Multinomial Naive Bayes | Fast, probabilistic classifier |
-| TF-IDF (Bigrams) | SVM (Linear)          | Handles high-dimensionality  |
-| Char-level TF-IDF | Logistic Regression     | Useful for short/spam-like texts |
+This repository demonstrates various approaches to solving multiclass text classification problems using traditional machine learning, deep learning (LSTMs), and modern transformer-based architectures.
 
 ---
 
-## 🧪 Dataset
+## 📊 Datasets Used
 
-- Source: SMS Spam
-- Classes: `0` (Spam), `1` (Ham)
+| Dataset           | Classes | Description                                                                 |
+|-------------------|---------|-----------------------------------------------------------------------------|
+| **AG News**       | 4       | News headlines categorized into 4 topics: World, Sports, Business, Sci/Tech |
+| **Yahoo Answers** | 10      | Community QA text, classified into 10 topics                                |
+| **TREC**          | 6       | Open-domain factoid questions classified into coarse question types         |
 
 ---
 
-## 🔧 Installation
+## 📌 Summary Table
 
-```bash
-git clone https://github.com/Koushim/text-binary-classification-classic-ml.git
-cd text-binary-classification-classic-ml
-pip install -r requirements.txt
+| Model Type       | Model               | Dataset       | Technique Highlights                                |
+|------------------|---------------------|---------------|-----------------------------------------------------|
+| Traditional      | Logistic Regression | AG News       | TF-IDF + One-vs-Rest, multinomial solver            |
+| Deep Learning    | BiLSTM              | AG News       | GloVe + LSTM + MaxPool                              |
+| Transformer Lite | DistilBERT          | Yahoo Answers | Hugging Face Trainer API, efficient fine-tuning     |
+| Transformer Full | RoBERTa             | TREC          | Token-level learning + label smoothing (0.1)        |
+
+---
+
+## 📂 Structure
+
+```
+
+multiclass-text-classification-nlp/
+│
+├── 1\_logistic\_regression\_tfidf\_agnews.ipynb
+├── 2\_bilstm\_glove\_agnews.ipynb
+├── 3\_distilbert\_yahooanswers.ipynb
+├── 4\_roberta\_trec\_labelsmoothing.ipynb
+│
+├── README.md
+└── requirements.txt
+
 ````
 
 ---
 
-## 🚀 Run on Google Colab
+## 🛠️ Key Features
+
+- 📚 Dataset loading via Hugging Face `datasets`
+- 🔤 Traditional models: TF-IDF with Logistic Regression
+- 🔁 BiLSTM model with GloVe embeddings
+- 🤗 Transformers via `Trainer` API (DistilBERT & RoBERTa)
+- 🧪 Evaluation using accuracy, precision, recall, and F1
+- ✅ Includes label smoothing (RoBERTa)
 
 ---
 
-## 📂 Project Structure
+## 🚀 Requirements
+
+Install required libraries using:
+
+```bash
+pip install -r requirements.txt
+````
+
+`requirements.txt`:
 
 ```
-text-binary-classification-classic-ml/
-│
-├── notebooks/
-│   └── binary_text_classification_models.ipynb  # Main notebook
-│
-├── requirements.txt
-└── README.md
+transformers
+datasets
+scikit-learn
+numpy
+pandas
+matplotlib
+torch
 ```
+
+---
+
+## 📈 Evaluation Metrics
+
+Each model logs:
+
+* Accuracy
+* Precision
+* Recall
+* F1 Score
+
+Evaluation is done using stratified splits or Hugging Face's `dataset["train"]` and `dataset["test"]`.
+
+---
+
+## 🤝 Contributing
+
+Feel free to fork this repo and explore new datasets or models. Suggestions and pull requests are welcome!
 
 ---
 
